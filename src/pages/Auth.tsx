@@ -55,8 +55,13 @@ const Auth = () => {
       } else if (isSignUp) {
         toast({
           title: 'Success',
-          description: 'Account created! Please check your email to verify.',
+          description: 'Account created! Please sign in to continue.',
         });
+        // Redirect to sign-in after successful signup
+        setIsSignUp(false);
+        setEmail('');
+        setPassword('');
+        setFullName('');
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {

@@ -84,6 +84,26 @@ export const PersonalInfoStep = () => {
             onChange={(e) => handleChange('website', e.target.value)}
           />
         </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="github">GitHub</Label>
+          <Input
+            id="github"
+            placeholder="github.com/johndoe"
+            value={cvData.personalInfo.github}
+            onChange={(e) => handleChange('github', e.target.value)}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="portfolio">Portfolio URL</Label>
+          <Input
+            id="portfolio"
+            placeholder="portfolio.johndoe.com"
+            value={cvData.personalInfo.portfolio}
+            onChange={(e) => handleChange('portfolio', e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );

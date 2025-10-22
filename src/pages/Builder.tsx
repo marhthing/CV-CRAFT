@@ -12,6 +12,10 @@ import { EducationStep } from '@/components/builder/steps/EducationStep';
 import { SkillsStep } from '@/components/builder/steps/SkillsStep';
 import { ExperienceStep } from '@/components/builder/steps/ExperienceStep';
 import { SummaryStep } from '@/components/builder/steps/SummaryStep';
+import ProjectsStep from '@/components/builder/steps/ProjectsStep';
+import CertificationsStep from '@/components/builder/steps/CertificationsStep';
+import LanguagesStep from '@/components/builder/steps/LanguagesStep';
+import AdditionalStep from '@/components/builder/steps/AdditionalStep';
 import { useToast } from '@/hooks/use-toast';
 
 const Builder = () => {
@@ -65,12 +69,34 @@ const Builder = () => {
     }
   };
 
+  const steps = [
+    { number: 1, title: 'Personal Info', required: true },
+    { number: 2, title: 'Education', required: true },
+    { number: 3, title: 'Skills', required: true },
+    { number: 4, title: 'Experience', required: true },
+    { number: 5, title: 'Summary', required: true },
+    { number: 6, title: 'Projects', required: false },
+    { number: 7, title: 'Certifications', required: false },
+    { number: 8, title: 'Languages', required: false },
+    { number: 9, title: 'Additional', required: false },
+  ];
+
+  const totalSteps = steps.length;
+
   const handleNext = () => {
-    if (currentStep < 5) {
+    if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
       saveCVData();
     } else {
-      navigate('/preview');
+      navigate('/dashboard');
+    }
+  };
+
+  const handleSkip = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      navigate('/dashboard');
     }
   };
 
@@ -92,6 +118,14 @@ const Builder = () => {
         return <ExperienceStep />;
       case 5:
         return <SummaryStep />;
+      case 6:
+        return <ProjectsStep />;
+      case 7:
+        return <CertificationsStep />;
+      case 8:
+        return <LanguagesStep />;
+      case 9:
+        return <AdditionalStep />;
       default:
         return <PersonalInfoStep />;
     }
@@ -154,7 +188,7 @@ const Builder = () => {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <ProgressBar currentStep={currentStep} totalSteps={5} />
+          <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
 
           <Card className="mt-8">
             <CardContent className="p-8">{renderStep()}</CardContent>
@@ -171,19 +205,26 @@ const Builder = () => {
               Back
             </Button>
 
-            <Button onClick={handleNext} disabled={!isStepValid()} size="lg">
-              {currentStep === 5 ? (
-                <>
-                  Preview CV
-                  <Eye className="h-4 w-4 ml-2" />
-                </>
-              ) : (
-                <>
-                  Next Step
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </>
+            <div className="flex gap-2">
+              {!steps[currentStep - 1]?.required && (
+                <Button onClick={handleSkip} variant="ghost" size="lg">
+                  Skip
+                </Button>
               )}
-            </Button>
+              <Button onClick={handleNext} disabled={!isStepValid()} size="lg">
+                {currentStep === totalSteps ? (
+                  <>
+                    Finish
+                    <Eye className="h-4 w-4 ml-2" />
+                  </>
+                ) : (
+                  <>
+                    Next Step
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </main>

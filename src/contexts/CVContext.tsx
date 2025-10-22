@@ -23,6 +23,40 @@ export interface Experience {
   description: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  link: string;
+  startDate: string;
+  endDate: string;
+}
+
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  expiryDate: string;
+  credentialId: string;
+}
+
+export interface Language {
+  id: string;
+  language: string;
+  proficiency: string;
+}
+
+export interface Reference {
+  id: string;
+  name: string;
+  position: string;
+  company: string;
+  email: string;
+  phone: string;
+}
+
 export interface CVData {
   personalInfo: {
     fullName: string;
@@ -31,11 +65,20 @@ export interface CVData {
     location: string;
     linkedin: string;
     website: string;
+    github: string;
+    portfolio: string;
   };
   education: Education[];
   skills: string[];
   experience: Experience[];
   summary: string;
+  projects: Project[];
+  certifications: Certification[];
+  languages: Language[];
+  references: Reference[];
+  volunteerWork: Experience[];
+  awards: string[];
+  interests: string[];
 }
 
 interface CVContextType {
@@ -61,11 +104,20 @@ const initialCVData: CVData = {
     location: '',
     linkedin: '',
     website: '',
+    github: '',
+    portfolio: '',
   },
   education: [],
   skills: [],
   experience: [],
   summary: '',
+  projects: [],
+  certifications: [],
+  languages: [],
+  references: [],
+  volunteerWork: [],
+  awards: [],
+  interests: [],
 };
 
 export const CVProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -104,7 +156,7 @@ export const CVProvider: React.FC<{ children: React.ReactNode }> = ({ children }
           .update({
             cv_data: cvData as any,
             current_step: currentStep,
-            is_complete: currentStep === 5,
+            is_complete: currentStep === 9,
             template_id: templateId,
           })
           .eq('id', cvId);
