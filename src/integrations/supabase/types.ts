@@ -14,7 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cvs: {
+        Row: {
+          created_at: string | null
+          current_step: number | null
+          cv_data: Json | null
+          id: string
+          is_complete: boolean | null
+          template_id: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          current_step?: number | null
+          cv_data?: Json | null
+          id?: string
+          is_complete?: boolean | null
+          template_id?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          current_step?: number | null
+          cv_data?: Json | null
+          id?: string
+          is_complete?: boolean | null
+          template_id?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cvs_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "templates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cvs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      templates: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          html_content: string
+          id: string
+          is_active: boolean | null
+          thumbnail_url: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          html_content: string
+          id?: string
+          is_active?: boolean | null
+          thumbnail_url?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          html_content?: string
+          id?: string
+          is_active?: boolean | null
+          thumbnail_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
