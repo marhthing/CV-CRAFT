@@ -152,11 +152,22 @@ const Builder = () => {
       case 5:
         return cvData.summary.length > 0;
       case 6:
+        // Projects: if started, must have at least one complete project
+        return cvData.projects.length === 0 || 
+               cvData.projects.some(p => p.title && p.description);
       case 7:
+        // Certifications: if started, must have at least one complete cert
+        return cvData.certifications.length === 0 || 
+               cvData.certifications.some(c => c.name && c.issuer);
       case 8:
+        // Languages: if started, must have at least one complete language
+        return cvData.languages.length === 0 || 
+               cvData.languages.some(l => l.language && l.proficiency);
       case 9:
+        // Additional: always valid (awards and interests are arrays of strings)
+        return true;
       case 10:
-        return true; // All additional steps and review are valid
+        return true; // Review step is always valid
       default:
         return true;
     }
