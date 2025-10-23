@@ -15,6 +15,7 @@ const steps = [
   { number: 7, label: 'Certificates' },
   { number: 8, label: 'Languages' },
   { number: 9, label: 'Additional' },
+  { number: 10, label: 'Review' },
 ];
 
 export const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {

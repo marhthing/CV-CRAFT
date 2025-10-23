@@ -156,7 +156,7 @@ export const CVProvider: React.FC<{ children: React.ReactNode }> = ({ children }
           .update({
             cv_data: cvData as any,
             current_step: currentStep,
-            is_complete: currentStep === 9,
+            is_complete: currentStep === 10,
             template_id: templateId,
           })
           .eq('id', cvId);

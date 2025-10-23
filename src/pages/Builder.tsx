@@ -16,6 +16,7 @@ import ProjectsStep from '@/components/builder/steps/ProjectsStep';
 import CertificationsStep from '@/components/builder/steps/CertificationsStep';
 import LanguagesStep from '@/components/builder/steps/LanguagesStep';
 import AdditionalStep from '@/components/builder/steps/AdditionalStep';
+import { ReviewStep } from '@/components/builder/steps/ReviewStep';
 import { useToast } from '@/hooks/use-toast';
 
 const Builder = () => {
@@ -74,11 +75,12 @@ const Builder = () => {
     { number: 2, title: 'Education', required: true },
     { number: 3, title: 'Skills', required: true },
     { number: 4, title: 'Experience', required: true },
-    { number: 5, title: 'Summary', required: true },
+    { number: 5, title: 'Professional Summary', required: true },
     { number: 6, title: 'Projects', required: false },
     { number: 7, title: 'Certifications', required: false },
     { number: 8, title: 'Languages', required: false },
     { number: 9, title: 'Additional', required: false },
+    { number: 10, title: 'Review', required: true },
   ];
 
   const totalSteps = steps.length;
@@ -126,6 +128,8 @@ const Builder = () => {
         return <LanguagesStep />;
       case 9:
         return <AdditionalStep />;
+      case 10:
+        return <ReviewStep />;
       default:
         return <PersonalInfoStep />;
     }
@@ -151,7 +155,8 @@ const Builder = () => {
       case 7:
       case 8:
       case 9:
-        return true; // All additional steps are optional
+      case 10:
+        return true; // All additional steps and review are valid
       default:
         return true;
     }
