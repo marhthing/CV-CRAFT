@@ -147,8 +147,13 @@ const Builder = () => {
         return true; // Experience is optional
       case 5:
         return cvData.summary.length > 0;
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+        return true; // All additional steps are optional
       default:
-        return false;
+        return true;
     }
   };
 

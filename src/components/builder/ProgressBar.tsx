@@ -6,11 +6,15 @@ interface ProgressBarProps {
 }
 
 const steps = [
-  { number: 1, label: 'Personal Info' },
+  { number: 1, label: 'Personal' },
   { number: 2, label: 'Education' },
   { number: 3, label: 'Skills' },
   { number: 4, label: 'Experience' },
   { number: 5, label: 'Summary' },
+  { number: 6, label: 'Projects' },
+  { number: 7, label: 'Certificates' },
+  { number: 8, label: 'Languages' },
+  { number: 9, label: 'Additional' },
 ];
 
 export const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {

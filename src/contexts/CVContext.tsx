@@ -180,10 +180,7 @@ export const CVProvider: React.FC<{ children: React.ReactNode }> = ({ children }
         if (data) setCvId(data.id);
       }
 
-      toast({
-        title: "Saved",
-        description: "Your CV has been saved successfully",
-      });
+      // Silent auto-save, no toast notification
     } catch (error: any) {
       toast({
         title: "Error",

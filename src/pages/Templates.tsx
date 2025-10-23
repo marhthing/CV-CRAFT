@@ -12,6 +12,7 @@ interface Template {
   id: string;
   title: string;
   description: string;
+  thumbnail_url: string | null;
 }
 
 const Templates = () => {
@@ -36,7 +37,7 @@ const Templates = () => {
     try {
       const { data, error } = await supabase
         .from('templates')
-        .select('id, title, description')
+        .select('id, title, description, thumbnail_url')
         .eq('is_active', true);
 
       if (error) throw error;
@@ -104,8 +105,16 @@ const Templates = () => {
                 onClick={() => handleSelectTemplate(template.id)}
               >
                 <CardHeader>
-                  <div className="h-48 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg mb-4 flex items-center justify-center">
-                    <FileText className="h-20 w-20 text-primary/30 group-hover:text-primary/50 transition-colors" />
+                  <div className="h-48 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                    {template.thumbnail_url ? (
+                      <img 
+                        src={template.thumbnail_url} 
+                        alt={template.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <FileText className="h-20 w-20 text-primary/30 group-hover:text-primary/50 transition-colors" />
+                    )}
                   </div>
                   <CardTitle>{template.title}</CardTitle>
                   <CardDescription>{template.description}</CardDescription>
