@@ -51,7 +51,8 @@ const Builder = () => {
 
       if (data) {
         setCvId(data.id);
-        setCurrentStep(data.current_step || 1);
+        // Don't auto-jump to saved step - start fresh
+        setCurrentStep(1);
         
         // Load CV data
         if (data.cv_data) {
@@ -85,11 +86,17 @@ const Builder = () => {
 
   const totalSteps = steps.length;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
       saveCVData();
     } else {
+      // Final step - save and mark as complete
+      await saveCVData();
+      toast({
+        title: 'Success!',
+        description: 'Your CV has been completed successfully.',
+      });
       navigate('/dashboard');
     }
   };
